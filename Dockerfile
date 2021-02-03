@@ -13,6 +13,6 @@ COPY index.html /var/www/html/
 COPY ./srcs/init.sh /
 COPY ./srcs/nginx_conf /
 
-
-
 EXPOSE 80
+
+CMD bash init.sh
