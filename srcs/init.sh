@@ -15,8 +15,10 @@ mv phpMyAdmin-5.0.1-english phpmyadmin
 # Replace php default conf by custom
 rm phpmyadmin/config.sample.inc.php
 mv config.sample.inc.php phpmyadmin/
+cd ../../../
 
 # Link availble with enabled
+rm /etc/nginx/sites-enabled/default
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 service nginx start
