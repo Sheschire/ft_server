@@ -9,9 +9,10 @@ RUN apt-get -y install vim
 RUN apt-get -y install mariadb-server
 RUN apt-get -y install php7.3 php-mysql php-fpm php-pdo php-gd php-cli php-mbstring
 
-COPY index.html /var/www/html/
+COPY index.html /var/www/42_ft_server/
 COPY ./srcs/init.sh /
 COPY ./srcs/nginx_conf /
+COPY ./srcs/config.sample.inc.php /
 
 EXPOSE 80
 
