@@ -2,6 +2,8 @@
 cd /var/www/html
 wget https://wordpress.org/latest.tar.gz
 tar -xvzf latest.tar.gz && rm -rf latest.tar.gz
+
+# Replace wordpress default by custom
 rm wordpress/wp-config-sample.php
 mv wp-config-sample.php wordpress/
 
@@ -15,22 +17,17 @@ rm phpmyadmin/config.sample.inc.php
 mv config.sample.inc.php phpmyadmin/
 cd ../../../
 
-# Link availble with enabled
-rm /etc/nginx/sites-enabled/default
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-
 # SSL
 mkdir /etc/nginx/ssl
-openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/nginx-selfsigned.crt -keyout /etc/nginx/ssl/nginx-selfsigned.key -subj "/C=FR/ST=Paris/L=Paris/O=42 School/OU=root/CN=localhost"
-
-service nginx start
+openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/localhost.pem -keyout /etc/nginx/ssl/localhost.key -subj "/C=FR/ST=Paris/L=Paris/O=42 School/OU=root/CN=localhost"
 
 # Authorization
 chown -R www-data /var/www/*
 chmod -R 755 /var/www/*
 
-service mysql start
+service nginx start
 service php7.3-fpm start
+service mysql start
 
 # Configure a wordpress database
 echo "CREATE DATABASE wordpress;"| mysql -u root --skip-password        
