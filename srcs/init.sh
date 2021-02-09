@@ -26,6 +26,7 @@ openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/
 chown -R www-data:www-data /var/www/*
 chmod -R 755 /var/www/*
 
+
 service nginx start
 service php7.3-fpm start
 service mysql start
